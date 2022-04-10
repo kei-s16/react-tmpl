@@ -1,0 +1,20 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    ports:
+      - target: 80
+        host_ip: 127.0.0.1
+        published: 8080
+        protocol: tcp
+        mode: host
+    volumes:
+      - ./dist:/public
+
+  node:
+    build:
+      context: .
+      dockerfile: ./docker/node/Dockerfile
+    volumes:
+      - ./:/react
